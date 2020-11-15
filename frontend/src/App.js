@@ -6,6 +6,9 @@ import {
   Link
 } from "react-router-dom";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
 import Home from "./components/Home";
 import About from "./components/About";
 
@@ -13,8 +16,6 @@ export default function App() {
   return (
     <Router>
       <div>
-        
-
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
