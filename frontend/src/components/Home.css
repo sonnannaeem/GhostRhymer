@@ -1,6 +1,104 @@
 @import url("https://fonts.googleapis.com/css?family=Lobster");
-
-.page-header {
+#root {
+  background-color: #1d201f;
+}
+.app-name {
   font-family: "Lobster", sans-serif;
+
+  display: inline-block;
+  height: 100%;
+  font-size: 50px;
+  padding: 30px;
+  color: #61dbfb;
+}
+.login-button {
+  color: #61dbfb;
+  background-color: black;
+  background-color: #61dbfb;
+  float: right;
+  color: black;
+  right: 30px;
+}
+.navbar {
+  background-color: #1d201f;
+}
+#nav-link {
+  color: white;
+}
+#nav-link:hover {
+  color: white;
+  font-weight: 900;
+}
+#user {
+  color: #61dbfb;
+
+  background-color: #61dbfb;
+  float: right;
+  color: black;
+  right: 30px;
+  margin: 4px;
+}
+#user:hover {
+  color: #61dbfb;
+  background-color: black;
+  transition: 0.8s ease;
+}
+.container-header {
+  width: 50%;
   text-align: center;
+  margin: auto;
+}
+.ss {
+  margin-right: 50px;
+  margin-top: 20px;
+}
+
+.nav-link {
+  margin: 30px;
+}
+.button-container {
+  padding: 20px;
+  float: left;
+  width: 100%;
+}
+.left-div {
+  padding: 20px;
+  float: left;
+  width: 50%;
+  position: relative;
+  padding: 20px;
+}
+.right-div {
+  padding: 20px;
+  float: right;
+  width: 50%;
+  top: 40px;
+  position: relative;
+  text-align: center;
+}
+p1 {
+  color: white;
+  margin: auto;
+}
+.gg {
+  position: relative;
+  margin-top: 20px;
+  float: right;
+}
+#submit {
+  color: black;
+
+  background-color: #61dbfb;
+}
+#submit:hover {
+  color: black;
+
+  background-color: white;
+  transition: 0.9s ease;
+}
+#quote {
+  color: white;
+}
+.textbox {
+  height: 120px;
 }
