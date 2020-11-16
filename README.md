@@ -2,7 +2,7 @@
 
 A songwriting web assistant
 <img src = "images/graduation.jpg" width = "400" height = "500">
-<img src = "images/itwaswritten.jpg" height = "400" width = "500>
+<img src = "images/itwaswritten.jpg" height = "400" width = "500">
 
 ## Installation
 
