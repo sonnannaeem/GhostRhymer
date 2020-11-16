@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "react-bootstrap/NavBar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
@@ -21,6 +21,9 @@ export default function Home() {
 
   const handleCloseLogin = () => setShow2(false);
   const handleShowLogin = () => setShow2(true);
+
+  const wordDisplayedInTextArea =
+    "My money was thinner than Sean Paul's goatee hair Now Jean Paul Gaultier cologne fill the air \n -Kanye West";
 
   return (
     <div>
@@ -108,10 +111,7 @@ export default function Home() {
           </div>
         </div>
         <div className="right-div">
-          <text id="quote">
-            My money was thinner than Sean Paul's goatee hair Now Jean Paul
-            Gaultier cologne fill the air -Kanye West
-          </text>
+          <text id="quote">{wordDisplayedInTextArea}</text>
         </div>
       </div>
     </div>

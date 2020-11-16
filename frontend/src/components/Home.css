@@ -102,3 +102,7 @@ p1 {
 .textbox {
   height: 120px;
 }
+
+#quote {
+  white-space: pre;
+}
