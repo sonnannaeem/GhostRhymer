@@ -13,17 +13,17 @@ export default function Home() {
   const handleClick = () => {
     console.log("HANDLECLICK WORKS");
   };
-  const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
+  const [showSignUp, setShow] = useState(false); //use sign up
+  const [showLogin, setShow2] = useState(false); //used for login
 
   const handleCloseSignUp = () => setShow(false);
-  const handleShowSignUp = () => setShow(true);
+  const handleShowSignUp = () => setShow(true); //used for signup
 
-  const handleCloseLogin = () => setShow2(false);
+  const handleCloseLogin = () => setShow2(false); //used for login
   const handleShowLogin = () => setShow2(true);
 
   const wordDisplayedInTextArea =
-    "My money was thinner than Sean Paul's goatee hair Now Jean Paul Gaultier cologne fill the air \n -Kanye West";
+    "My money was thinner than Sean Paul's goatee hair now Jean Paul Gaultier cologne fill the air \n -Kanye West";
 
   return (
     <div>
@@ -35,7 +35,7 @@ export default function Home() {
           Sign Up
         </Button>
       </div>
-      <Modal show={show} onHide={handleCloseSignUp}>
+      <Modal show={showSignUp} onHide={handleCloseSignUp}>
         <Modal.Header closeButton>
           <Modal.Title>Sign Up</Modal.Title>
         </Modal.Header>
@@ -44,9 +44,7 @@ export default function Home() {
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
+              <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
@@ -54,13 +52,13 @@ export default function Home() {
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button id="user" type="submit">
               Sign Up
             </Button>
           </Form>
         </Modal.Body>
       </Modal>
-      <Modal show={show2} onHide={handleCloseLogin}>
+      <Modal show={showLogin} onHide={handleCloseLogin}>
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
@@ -76,23 +74,26 @@ export default function Home() {
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button id="user" type="submit">
               Log in
             </Button>
           </Form>
         </Modal.Body>
       </Modal>
-      <div className="container-header">
+      <div className="container-name">
         <h1 className="app-name">Ghost Rhymer</h1>
       </div>
 
       <Navbar className="navbar" expand="lg">
         <Nav className="m-auto">
           <Nav.Link id="nav-link" onClick={() => handleClick()}>
-            Rhymes
+            Words that Rhyme
           </Nav.Link>
           <Nav.Link id="nav-link" onClick={() => handleClick()}>
-            Synonyms
+            Words that Rhyme in context
+          </Nav.Link>
+          <Nav.Link id="nav-link" onClick={() => handleClick()}>
+            Words that sound similar
           </Nav.Link>
         </Nav>
       </Navbar>
