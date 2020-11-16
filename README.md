@@ -1,7 +1,9 @@
 # GhostRhymer
 
-<img src = "images/graduation.jpg" width = "500" height = "400">
-<img src = "images/itwaswritten.jpg" height = "400" width = "500">
+<p align ="center">
+  <img src = "images/graduation.jpg" width = "500" height = "400" alt = "Kanye West - Graduation">
+  <img src = "images/itwaswritten.jpg" height = "400" width = "500" alt = "NAS - It was written">
+</p>
 
 ### Description
 
