@@ -27,12 +27,12 @@ export default function Home() {
 
   return (
     <div>
-      <div className="ss">
+      <div className="user-action">
         <Button id="user" variant="primary" onClick={handleShowLogin}>
           Login
         </Button>
         <Button id="user" variant="primary" onClick={handleShowSignUp}>
-          Sign-Up
+          Sign Up
         </Button>
       </div>
       <Modal show={show} onHide={handleCloseSignUp}>
@@ -98,13 +98,13 @@ export default function Home() {
       </Navbar>
       <div className="button-container">
         <div className="left-div">
-          <InputGroup className="textbox">
+          <InputGroup>
             <InputGroup.Prepend>
               <InputGroup.Text>Enter verse</InputGroup.Text>
             </InputGroup.Prepend>
             <FormControl as="textarea" aria-label="With textarea" />
           </InputGroup>
-          <div className="gg">
+          <div className="submit-button">
             <Button id="submit" onClick={handleClick}>
               Find Rhymes {/*tick so it can be dynamic with selection */}
             </Button>

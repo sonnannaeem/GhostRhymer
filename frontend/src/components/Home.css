@@ -48,7 +48,7 @@
   text-align: center;
   margin: auto;
 }
-.ss {
+.user-action {
   margin-right: 50px;
   margin-top: 20px;
 }
@@ -62,10 +62,9 @@
   width: 100%;
 }
 .left-div {
-  padding: 20px;
-  float: left;
   width: 50%;
   position: relative;
+  display: inline-block;
   padding: 20px;
 }
 .right-div {
@@ -76,14 +75,9 @@
   position: relative;
   text-align: center;
 }
-p1 {
-  color: white;
-  margin: auto;
-}
-.gg {
-  position: relative;
+.submit-button {
   margin-top: 20px;
-  float: right;
+  text-align: right;
 }
 #submit {
   color: black;
