@@ -8,17 +8,37 @@ import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Home.css";
+import Axios from "axios";
 
 export default function Home() {
-  const handleClick = () => {
-    console.log("HANDLECLICK WORKS");
-  };
   const [showSignUp, setShow] = useState(false); //use sign up
   const [showLogin, setShow2] = useState(false); //used for login
+  const [rhymesText, setRhymesText] = 
+    useState("My money was thinner than Sean Paul's goatee hair now Jean Paul Gaultier cologne fill the air \n -Kanye West");
 
+  const handleClick = () => {
+    console.log("HOME#HANDLECLICK");
+
+    Axios({
+      method: "GET",
+      url: "http://localhost:5000/api/rhymes/get-rhymes",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        setRhymesText(res.data.rhymes);
+      })
+      .catch((err) => console.log(err));
+
+    console.log(rhymesText);
+  };
+
+  //Used for Signup Dialog
   const handleCloseSignUp = () => setShow(false);
   const handleShowSignUp = () => setShow(true); //used for signup
 
+  //Used for Login Dialog
   const handleCloseLogin = () => setShow2(false); //used for login
   const handleShowLogin = () => setShow2(true);
 
@@ -112,7 +132,7 @@ export default function Home() {
           </div>
         </div>
         <div className="right-div">
-          <text id="quote">{wordDisplayedInTextArea}</text>
+          <text id="quote">{rhymesText}</text>
         </div>
       </div>
     </div>

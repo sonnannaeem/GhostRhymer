@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 
 require("dotenv").config(); // config file -> sensitive information, hash or salt password,
 
+const rhymes = require("./routes/api/rhymes");
+
 const app = express(); // opens the connection
 const port = process.env.PORT || 5000; //typical backend port number, constant that we use in ENV file. In case our one port fails
 
@@ -18,7 +20,7 @@ const MONGO_URI = process.env.MONGO_URI; //connection string to mongo on the bac
 
 mongoose
   .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  
+
   .then(() => {
     console.log("MongoDB Successfully Connected");
   })
@@ -28,3 +30,5 @@ mongoose
 app.get("/", (req, res) => {
   res.send("BACKEND#SERVER: Server works"); //test server connection has been set up
 });
+
+app.use("/api/rhymes", rhymes);
