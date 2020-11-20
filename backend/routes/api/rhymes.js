@@ -1,9 +1,11 @@
 const express = require("express");
+const datamuse = require("datamuse");
 const router = express.Router();
 
-router.get('/get-rhymes', function (req, res) {
-    console.log("RHYMES#GET-RHYMES");
-    res.send({rhymes: "Lorum Ipsum"});
+router.post("/get-rhymes", function (req, res) {
+    datamuse.request(`words?rel_rhy=${req.body.rhyme}`).then((rhymesJson) => {
+        res.send(rhymesJson);
+    });
 });
 
 module.exports = router;

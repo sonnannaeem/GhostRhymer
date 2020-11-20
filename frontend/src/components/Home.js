@@ -13,25 +13,39 @@ import Axios from "axios";
 export default function Home() {
   const [showSignUp, setShow] = useState(false); //use sign up
   const [showLogin, setShow2] = useState(false); //used for login
-  const [rhymesText, setRhymesText] = 
-    useState("My money was thinner than Sean Paul's goatee hair now Jean Paul Gaultier cologne fill the air \n -Kanye West");
+  const [userText, setUserText] = useState("");
+  const [rhymesText, setRhymesText] = useState(
+    "My money was thinner than Sean Paul's goatee hair now Jean Paul Gaultier cologne fill the air \n -Kanye West"
+  ); //used for rhymes display
 
+  //calls the backend for rhymes and displays them
   const handleClick = () => {
-    console.log("HOME#HANDLECLICK");
-
+    let lastWordTyped = userText;
     Axios({
-      method: "GET",
+      method: "POST",
       url: "http://localhost:5000/api/rhymes/get-rhymes",
+      data: {
+        rhyme: `${lastWordTyped}`,
+      },
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((res) => {
-        setRhymesText(res.data.rhymes);
+        let rhymesData = res.data;
+        let rhymesString = "";
+
+        for (var i in rhymesData) {
+          if (i == rhymesData.length - 1) {
+            rhymesString += `${rhymesData[i].word}`;
+          } else {
+            rhymesString += `${rhymesData[i].word}, `;
+          }
+        }
+
+        setRhymesText(rhymesString);
       })
       .catch((err) => console.log(err));
-
-    console.log(rhymesText);
   };
 
   //Used for Signup Dialog
@@ -41,9 +55,6 @@ export default function Home() {
   //Used for Login Dialog
   const handleCloseLogin = () => setShow2(false); //used for login
   const handleShowLogin = () => setShow2(true);
-
-  const wordDisplayedInTextArea =
-    "My money was thinner than Sean Paul's goatee hair now Jean Paul Gaultier cologne fill the air \n -Kanye West";
 
   return (
     <div>
@@ -107,13 +118,13 @@ export default function Home() {
       <Navbar className="navbar" expand="lg">
         <Nav className="m-auto">
           <Nav.Link id="nav-link" onClick={() => handleClick()}>
-            Words that Rhyme
+            Rhyming words
           </Nav.Link>
           <Nav.Link id="nav-link" onClick={() => handleClick()}>
-            Words that Rhyme in context
+            Synonymous words
           </Nav.Link>
           <Nav.Link id="nav-link" onClick={() => handleClick()}>
-            Words that sound similar
+            Related words
           </Nav.Link>
         </Nav>
       </Navbar>
@@ -121,9 +132,14 @@ export default function Home() {
         <div className="left-div">
           <InputGroup>
             <InputGroup.Prepend>
-              <InputGroup.Text>Enter verse</InputGroup.Text>
+              <InputGroup.Text>Enter word</InputGroup.Text>
             </InputGroup.Prepend>
-            <FormControl as="textarea" aria-label="With textarea" />
+            <Form.Control
+              id="userTextBox"
+              as="textarea"
+              aria-label="With textarea"
+              onChange={e => setUserText(e.target.value)}
+            />
           </InputGroup>
           <div className="submit-button">
             <Button id="submit" onClick={handleClick}>
