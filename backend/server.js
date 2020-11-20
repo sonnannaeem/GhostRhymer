@@ -8,7 +8,7 @@ const rhymes = require("./routes/api/rhymes");
 
 const app = express(); // opens the connection
 const port = process.env.PORT || 5000; //typical backend port number, constant that we use in ENV file. In case our one port fails
-
+// npm i -g nodemon
 app.use(cors()); // Web policy so you restrict the amount of resources from different ports (frontend/backend)
 app.use(express.json()); // calls a function that imports the express library of json so that we can read json objects through express
 

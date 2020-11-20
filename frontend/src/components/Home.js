@@ -15,7 +15,7 @@ export default function Home() {
   const [showLogin, setShow2] = useState(false); //used for login
   const [userText, setUserText] = useState("");
   const [rhymesText, setRhymesText] = useState(
-    "My money was thinner than Sean Paul's goatee hair now Jean Paul Gaultier cologne fill the air \n -Kanye West"
+    "My money was thinner than Sean Paul's goatee hair now Jean Paul Gaultier cologne fill the air \n-Kanye West"
   ); //used for rhymes display
 
   //calls the backend for rhymes and displays them
@@ -138,7 +138,7 @@ export default function Home() {
               id="userTextBox"
               as="textarea"
               aria-label="With textarea"
-              onChange={e => setUserText(e.target.value)}
+              onChange={(e) => setUserText(e.target.value)}
             />
           </InputGroup>
           <div className="submit-button">

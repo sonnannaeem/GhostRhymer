@@ -49,6 +49,7 @@
   position: relative;
   display: inline-block;
   padding: 20px;
+  height: 300px;
 }
 .right-div {
   padding: 20px;
@@ -72,9 +73,7 @@
   transition: 0.9s ease;
 }
 #quote {
+  resize: horizontal;
   color: white;
-}
-
-#quote {
-  white-space: pre;
+  white-space: pre-wrap;
 }
