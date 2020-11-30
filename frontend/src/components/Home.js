@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Navbar from "react-bootstrap/NavBar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -10,40 +9,53 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Home.css";
 import Axios from "axios";
 
+function getLastWord(words) {
+  var n = words.split(" ");
+  var lastWord = n[n.length - 1];
+  console.log(`HOME#LASTWORD: ${lastWord}`);
+  return lastWord;
+}
+
 export default function Home() {
   const [showSignUp, setShow] = useState(false); //use sign up
   const [showLogin, setShow2] = useState(false); //used for login
+  const [endpoint, setEndpoint] = useState("get-rhymes");
+  const [buttonText, setButtonText] = useState("Find Rhymes");
   const [userText, setUserText] = useState("");
-  const [rhymesText, setRhymesText] = useState(
+  const [wordsText, setResultsText] = useState(
     "My money was thinner than Sean Paul's goatee hair now Jean Paul Gaultier cologne fill the air \n-Kanye West"
   ); //used for rhymes display
 
   //calls the backend for rhymes and displays them
   const handleClick = () => {
-    let lastWordTyped = userText;
+    let lastWordTyped = getLastWord(userText);
     Axios({
       method: "POST",
-      url: "http://localhost:5000/api/rhymes/get-rhymes",
+      url: `http://localhost:5000/api/rhymes/${endpoint}`,
       data: {
-        rhyme: `${lastWordTyped}`,
+        word: `${lastWordTyped}`,
       },
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((res) => {
-        let rhymesData = res.data;
-        let rhymesString = "";
+        let wordsData = res.data;
 
-        for (var i in rhymesData) {
-          if (i == rhymesData.length - 1) {
-            rhymesString += `${rhymesData[i].word}`;
-          } else {
-            rhymesString += `${rhymesData[i].word}, `;
+        if (wordsData.length < 1) {
+          setResultsText("No results...Sorry!");
+        } else {
+          let wordsString = "";
+
+          for (var i in wordsData) {
+            if (i == wordsData.length - 1) {
+              wordsString += `${wordsData[i].word}`;
+            } else {
+              wordsString += `${wordsData[i].word}, `;
+            }
           }
+          setResultsText(wordsString);
         }
-
-        setRhymesText(rhymesString);
       })
       .catch((err) => console.log(err));
   };
@@ -117,13 +129,31 @@ export default function Home() {
 
       <Navbar className="navbar" expand="lg">
         <Nav className="m-auto">
-          <Nav.Link id="nav-link" onClick={() => handleClick()}>
+          <Nav.Link
+            id="nav-link"
+            onClick={() => {
+              setEndpoint("get-rhymes");
+              setButtonText("Find Rhymes");
+            }}
+          >
             Rhyming words
           </Nav.Link>
-          <Nav.Link id="nav-link" onClick={() => handleClick()}>
+          <Nav.Link
+            id="nav-link"
+            onClick={() => {
+              setEndpoint("get-syn");
+              setButtonText("Find Synonymous");
+            }}
+          >
             Synonymous words
           </Nav.Link>
-          <Nav.Link id="nav-link" onClick={() => handleClick()}>
+          <Nav.Link
+            id="nav-link"
+            onClick={() => {
+              setEndpoint("get-related");
+              setButtonText("Find Related");
+            }}
+          >
             Related words
           </Nav.Link>
         </Nav>
@@ -143,12 +173,12 @@ export default function Home() {
           </InputGroup>
           <div className="submit-button">
             <Button id="submit" onClick={handleClick}>
-              Find Rhymes {/*tick so it can be dynamic with selection */}
+              {buttonText} {/*tick so it can be dynamic with selection */}
             </Button>
           </div>
         </div>
         <div className="right-div">
-          <text id="quote">{rhymesText}</text>
+          <text id="quote">{wordsText}</text>
         </div>
       </div>
     </div>
