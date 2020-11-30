@@ -22,6 +22,7 @@ Assuming you have the root folder open in your terminal, input the following com
 - `cd backend`
 
 - `nodemon server`
+  - If **nodemon server** does not work, try **`npm start`** instead
 
 ## Running the frontend
 
