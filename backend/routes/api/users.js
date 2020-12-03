@@ -9,13 +9,15 @@ router.post("/register", function (req, res) {
   const newuser = new User(req.body); //Taking in user
 
   if (newuser.password != newuser.password2)
-    return res.status(400).json({ message: "Passwords must match" });
+    return res.json({ error: true, message: "Passwords must match" });
 
   User.findOne({ email: newuser.email }, function (err, user) {
     if (user)
-      return res
-        .status(400)
-        .json({ auth: false, message: "Email already exists" });
+      return res.json({
+        error: true,
+        auth: false,
+        message: "Email already exists",
+      });
 
     newuser.save((err, doc) => {
       if (err) {
@@ -36,7 +38,7 @@ router.post("/login", function (req, res) {
   User.findByToken(token, (err, user) => {
     if (err) return res(`OH NO ${err}`);
     if (user)
-      return res.status(400).json({
+      return res.json({
         error: true,
         message: "You're already logged in",
       });
@@ -44,23 +46,28 @@ router.post("/login", function (req, res) {
       User.findOne({ email: req.body.email }, function (err, user) {
         if (!user)
           return res.json({
+            error: true,
             isAuth: false,
-            message: "Auth failed, email not found",
+            message: "Email not found",
           });
 
         user.comparepassword(req.body.password, (err, isMatch) => {
           if (!isMatch)
             return res.json({
+              error: true,
               isAuth: false,
               message: "Password doesn't match",
             });
-
           user.generateToken((err, user) => {
-            if (err) return res.status(400).send(err);
+            if (err) {
+              return res.status(400).send(err);
+            }
+            // console.log("HERE: " + user.token);
             res.cookie("auth", user.token).json({
               isAuth: true,
               id: user._id,
               email: user.email,
+              firstname: user.firstname
             });
           });
         });
@@ -70,24 +77,22 @@ router.post("/login", function (req, res) {
 });
 
 //Retrieves user if they're logged in
-router.get('/profile',auth,function(req,res){
-    res.json({
-        isAuth: true,
-        id: req.user._id,
-        email: req.user.email,
-        firstname: req.user.firstname,
-        lastname: req.user.lastname
-        
-    })
+router.get("/profile", auth, function (req, res) {
+  res.json({
+    isAuth: true,
+    id: req.user._id,
+    email: req.user.email,
+    firstname: req.user.firstname,
+    lastname: req.user.lastname,
+  });
 });
 
 //Log out endpoint
-router.get('/logout',auth,function(req,res){
-    req.user.deleteToken(req.token,(err,user)=>{
-        if(err) return res.status(400).send(err);
-        res.sendStatus(200);
-    });
-
-}); 
+router.get("/logout", auth, function (req, res) {
+  req.user.deleteToken(req.token, (err, user) => {
+    if (err) return res.status(400).send(err);
+    res.sendStatus(200);
+  });
+});
 
 module.exports = router;
