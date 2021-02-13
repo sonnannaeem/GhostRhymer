@@ -6,8 +6,8 @@ import { Layout } from 'antd';
 
 export default function GR1() {
 
-
   return (
-\
+    <div></div>
   );
+
 }
