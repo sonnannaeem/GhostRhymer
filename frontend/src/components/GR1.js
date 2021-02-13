@@ -8,6 +8,6 @@ export default function GR1() {
 
 
   return (
-\
+
   );
 }
