@@ -3,6 +3,8 @@
 <p align ="center">
   <img src = "images/graduation.jpg" width = "350" height = "300" alt = "Kanye West - Graduation">
   <img src = "images/itwaswritten.jpg" height = "300" width = "350" alt = "NAS - It was written">
+  
+  Lemme reintroduce myself...
 </p>
 
 ### Description
